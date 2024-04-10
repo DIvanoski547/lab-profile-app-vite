@@ -4,8 +4,8 @@ import Container from 'react-bootstrap/Container';
 import authService from '../services/auth.service';
 
 function Signup() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [campus, setCampus] = useState("");
   const [course, setCourse] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -14,29 +14,28 @@ function Signup() {
 
   const handleUsername = (e) => setUsername(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-  const handlecampus = (e) => setCampus(e.target.value);
-  const handlecourse = (e) => setCourse(e.target.value);
+  const handleCampus = (e) => setCampus(e.target.value);
+  const handleCourse = (e) => setCourse(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     const requestBody = { username, password, campus, course };
 
-    authService
-      .signup(requestBody)
+    authService.signup(requestBody)
       .then(() => {
         navigate('/login');
       })
       .catch((error) => {
-       const errorMessage = error.response.data.message;
-       setErrorMessage(errorMessage);
-      });
+        const errorMessage = error.response ? error.response.data.message : "An error occurred";
+        setErrorMessage(errorMessage);
+      });      
   };
 
   return (
     <Container>
       <h1>Sign Up</h1>
       <form onSubmit={handleSignupSubmit}>
-        <label htmlFor="username">Username:</label>
+        <label>Username:</label>
         <input
           type="text"
           name="username"
@@ -45,7 +44,7 @@ function Signup() {
           onChange={handleUsername}
         />
 
-        <label htmlFor="password">Password:</label>
+        <label>Password:</label>
         <input
           type="password"
           name="password"
@@ -54,13 +53,11 @@ function Signup() {
           onChange={handlePassword}
         />
 
-        <label htmlFor="campus">Campus:</label>
-
+        <label>Campus:</label>
         <select
-          type="text"
           name="campus"
           value={campus}
-          onChange={handlecampus}
+          onChange={handleCampus}
         >
           <option></option>
           <option>Madrid</option>
@@ -75,12 +72,11 @@ function Signup() {
           <option>Remote</option>
         </select>
 
-        <label htmlFor="course">Course:</label>
+        <label>Course:</label>
         <select
-          type="text"
           name="course"
           value={course}
-          onChange={handlecourse}
+          onChange={handleCourse}
         >
           <option></option>
           <option>Web Dev</option>
