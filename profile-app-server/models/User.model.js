@@ -12,20 +12,16 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.'],
     },
-    campus: [
-      'Madrid',
-      'Barcelona',
-      'Miami',
-      'Paris',
-      'Berlin',
-      'Amsterdam',
-      'México',
-      'Sao Paulo',
-      'Lisbon',
-      'Remote',
-    ],
+    campus: { type: String,
+      required: true,
+      enum: ["Madrid", "Barcelona", "Miami", "Paris", "Berlin",
+            "Amsterdam", "México", "Sao Paulo", "Lisbon", "Remote"]
+    },
 
-    course: ['Web Dev', 'UX/UI', 'Data Analytics', 'Cyber Security'],
+    course: { type: String,
+      required: true,
+      enum: ["Web Dev", "UX/UI", "Data Analytics","Cyber Security"]
+    },
     image: { type: String },
   },
   {
